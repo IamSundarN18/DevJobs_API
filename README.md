@@ -3,14 +3,8 @@ Starting off by creating API endpoints and handling them using different routes.
 
 ## Features
 
-- 🔐 JWT Authentication
-- 📝 CRUD Operations for Jobs
-- 🔍 Job Search and Filtering
-- 📦 Bulk Job Upload
-- 🛡️ Protected Routes
-- 📊 MySQL Database Integration
-- 🔄 Sequelize ORM
-- 🚀 RESTful API Design
+🔐 JWT Authentication 📝 CRUD Operations for Jobs 🔍 Job Search and Filtering 📦 Bulk Job Upload
+🛡️ Protected Routes 📊 MySQL Database Integration 🔄 Sequelize ORM 🚀 RESTful API Design
 
 ## Tech Stack
 
