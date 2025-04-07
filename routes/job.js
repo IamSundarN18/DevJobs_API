@@ -18,6 +18,7 @@ router.get("/",async(req,res)=> {
 });
 
 
+
 //Get job by ID
 router.get("/:id",async(req,res) => {
   try{
@@ -89,6 +90,53 @@ router.post("/bulk",authMiddleware, async(req,res)=> {
     });
   } catch(error){
     console.error("Error in bulk creation: ", error);
+    res.status(500).json({
+      error: "Server error",
+      details: error.message
+    });
+  }
+});
+
+//Update a job
+router.put("/:id",authMiddleware, async(req,res)=> {
+  try{
+    const {title,company,description,location,salary} = req.body;
+    const job = await Job.findByPk(req.body.id);
+
+    if(!job){
+      return res.status(404).json({error: "Job not found"});
+    }
+    if(title) job.title = title;
+    if(company) job.company = company;
+    if(description) job.description = description;
+    if(location) job.location = location;
+    if(salary!== undefined) job.salary = salary;
+    await job.save();
+    res.json({
+      message: "Job updated successfully",
+      job
+    });
+  } catch(error){
+    console.error("Error updating job:",error);
+    res.status(500).json({
+      error:"Server error",
+      details: error.message
+    });
+  }
+});
+
+router.delete("/:id",authMiddleware,async(req,res)=> {
+  try{
+    console.log("Attempting to delete job with ID:", req.params.id);
+    const job = await Job.findByPk(req.params.id);
+    console.log("Found job:", job);
+    if(!job){
+      return res.status(404).json({error:"job id not found"});
+    }
+    await job.destroy();
+    res.json({message:"Job deleted successfully"});
+  } catch(error){
+    console.error("Error deleting job:",error);
     res.status(500).json({
       error: "Server error",
       details: error.message

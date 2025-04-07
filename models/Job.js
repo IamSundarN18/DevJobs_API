@@ -42,9 +42,7 @@ const Job = sequelize.define("Job", {
   }
 }, {
   timestamps: true,
-  tableName: 'jobs',
-  // Force table recreation
-  force: true
+  tableName: 'jobs'
 });
 
 module.exports = Job;

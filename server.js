@@ -83,12 +83,14 @@ const startServer = async () => {
     // Test database connection
     await testConnection();
     
-    // Sync all models with database - remove force: true to preserve data
-    await sequelize.sync();
-    console.log('Database tables synced!');
+    // Sync all models with database
+    // Use alter: true to update tables without dropping data
+    await sequelize.sync({ alter: true });
+    console.log('Database tables synced successfully!');
     
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
+      console.log('Database is ready to accept connections');
     });
   } catch (error) {
     console.error('Unable to start server:', error);
