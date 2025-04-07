@@ -83,9 +83,9 @@ const startServer = async () => {
     // Test database connection
     await testConnection();
     
-    // Sync all models with database
-    await sequelize.sync({ force: true });
-    console.log('Database & tables created!');
+    // Sync all models with database - remove force: true to preserve data
+    await sequelize.sync();
+    console.log('Database tables synced!');
     
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
