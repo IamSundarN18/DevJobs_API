@@ -26,3 +26,20 @@ Starting off by creating API endpoints and handling them using different routes.
 - Node.js (v14 or higher)
 - MySQL Server
 - npm or yarn
+
+## API Endpoints
+
+### Authentication
+
+- `POST /auth/signup` - Register a new user
+- `POST /auth/login` - Login and get JWT token
+
+### Jobs
+
+- `GET /jobs` - Get all jobs
+- `GET /jobs/:id` - Get job by ID
+- `POST /jobs` - Create a new job (Protected)
+- `POST /jobs/bulk` - Bulk create jobs (Protected)
+- `PUT /jobs/:id` - Update a job (Protected)
+- `DELETE /jobs/:id` - Delete a job (Protected)
+
