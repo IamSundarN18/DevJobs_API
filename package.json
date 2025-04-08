@@ -4,7 +4,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "dev:reset": "set RESET_DB=true&& nodemon server.js",
+    "start:reset": "set RESET_DB=true&& node server.js"
   },
   "keywords": [],
   "author": "",

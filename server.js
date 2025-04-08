@@ -8,8 +8,7 @@ const bodyParser = require("body-parser");
 console.log("Loading dependencies...");
 
 const { sequelize, testConnection } = require("./config/db");
-const User = require("./models/user");
-const Job = require("./models/job");
+const { Job, Skill, Benefit, Requirement } = require("./models/associations");
 
 console.log("Models loaded successfully");
 
@@ -84,9 +83,15 @@ const startServer = async () => {
     await testConnection();
     
     // Sync all models with database
-    // Use alter: true to update tables without dropping data
-    await sequelize.sync({ alter: true });
-    console.log('Database tables synced successfully!');
+    const shouldResetDb = process.env.RESET_DB === 'true';
+    if (shouldResetDb) {
+      console.log('Resetting database...');
+      await sequelize.sync({ force: true });
+      console.log('Database reset complete.');
+    } else {
+      await sequelize.sync();
+      console.log('Database tables synced successfully!');
+    }
     
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
@@ -113,3 +118,9 @@ startServer().catch(error => {
   console.error('Failed to start server:', error);
   process.exit(1);
 });
+
+
+// npm start - Regular start, preserves data
+// npm run dev - Development mode with nodemon, preserves data
+// npm run dev:reset - Development mode with database reset
+// npm run start:reset - Production start with database reset

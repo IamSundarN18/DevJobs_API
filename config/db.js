@@ -9,7 +9,13 @@ const sequelize = new Sequelize("devjobs", "root", "mysqlroot", {
     min: 0,
     acquire: 30000,
     idle: 10000
-  }
+  },
+  dialectOptions: {
+    dateStrings: true,
+    typeCast: true,
+    timezone: '+05:30' 
+  },
+  timezone: '+05:30' 
 });
 
 // Test database connection

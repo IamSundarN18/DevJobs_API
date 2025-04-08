@@ -7,6 +7,7 @@ require("dotenv").config();
 const router = express.Router();
 const SECRET_KEY = process.env.JWT_SECRET || "default_secret";
 //console.log(SECRET_KEY);
+
 //User Sign Up
 router.post("/signup",async(req,res) => {
   const {username,email,password} = req.body;
